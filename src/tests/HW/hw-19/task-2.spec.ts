@@ -7,10 +7,33 @@
 
 import { test, expect } from "@playwright/test";
 
+type Country = "USA" | "Canada" | "UK";
+type Gender = "male" | "female";
+type Hobbies = "Travelling" | "Movies" | "Sports" | "Gaming" | "Dancing";
+type Skill = "JavaScript" | "Python" | "Java" | "C++" | "Ruby";
+type Month = "January" | "February" | "March" | "April" | "May" | "June" | "July" | "August" | "September" | "October" | "November" | "December";
+
+interface IRegistrationData {
+  firstName: string;
+  lastName: string;
+  address: string;
+  phone: string;
+  email: string;
+  country: Country;
+  sex: Gender;
+  hobbies: Hobbies[];
+  language: string;
+  skills: Skill[];
+  birthdayYear: string;
+  birthdayMonth: Month;
+  birthdayDay: string;
+  password: string;
+}
+
 test.describe("[DEMO REGISTRATION FORM] [SMOKE]", () => {
   const baseUrl = "https://anatoly-karpovich.github.io/demo-registration-form/";
 
-  const registrationData = {
+  const registrationData: IRegistrationData = {
     firstName: "Anna",
     lastName: "Smith",
     address: "123 Main Street, Los Angeles, CA",
@@ -38,7 +61,7 @@ test.describe("[DEMO REGISTRATION FORM] [SMOKE]", () => {
     const countrySelector = page.locator('#country');
     const maleGenderRadio = page.locator('input[value="male"]');
     const femaleGenderRadio = page.locator('input[value="female"]');
-    const hobbiesCheckbox = (hobby: string) => page.locator(`input[value="${hobby}"]`);
+    const hobbiesCheckbox = (hobby: Hobbies) => page.locator(`input[value="${hobby}"]`);
     const languageInput = page.locator('#language');
     const skillSelector = page.locator('#skills');
     const birthdayYearSelector = page.locator('#year');
